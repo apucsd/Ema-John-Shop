@@ -1,26 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const Order = (props) => {
-  console.log(props);
-  const { id, category, name, seller, price, ratings, img } = props.product;
+  // console.log(props.cart);
+  const { cart } = props;
+  // console.log(cart);
+  let shipping = 0;
+  let total = 0;
+  for (const product of cart) {
+    // console.log(1);
+    total = total + product.price;
+    shipping = shipping + product.shipping;
+  }
+  const tax = parseFloat(total * (7 / 100));
+  const grandTotal = total + shipping + tax;
+  // console.log(total, tax, shipping);
+
   return (
-    <div>
-      <h1 className="text-center underline font-semibold text-3xl">
+    <div className="bg-[#faee06b1] p-5 sticky top-2">
+      <h1 className="text-center font-semibold my-2 underline">
         Order Summary
       </h1>
-
-      {props.product.id && (
-        <div className="my-3 mx-auto">
-          <img className="w-[50%] h-[200px] mx-auto" src={img} alt="" />
-          <h2 className="font-semibold my-2">Product Name: {name}</h2>
-          <div className="text-slate-700">
-            <hr />
-            <p>Category: {category}</p>
-            <p>Price: {price}</p>
-            <p>Seller: {seller}</p>
-          </div>
-        </div>
-      )}
+      <p>Selected Items: {cart.length}</p>
+      <p>Total Price: ${total}</p>
+      <p>Total Shipping: {shipping}</p>
+      <p>Tax: {tax.toFixed(2)}</p>
+      <h4>Grand Total : {grandTotal}</h4>
     </div>
   );
 };

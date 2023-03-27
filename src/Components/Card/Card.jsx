@@ -2,7 +2,7 @@ import React from "react";
 
 const Card = (props) => {
   const { id, category, name, seller, price, ratings, img } = props.product;
-  const addToCart = props.addToCart;
+  const handleCart = props.handleCart;
   // console.log(props);
   return (
     <div className="card w-full bg-base-100 shadow-xl">
@@ -16,7 +16,7 @@ const Card = (props) => {
         <p>Ratings: {ratings}</p>
       </div>
       <div
-        onClick={() => addToCart(props.product)}
+        onClick={() => handleCart(props.product)}
         className="flex bg-primary p-3 cursor-pointer text-white rounded-b-lg justify-center gap-2"
       >
         <button className=" ">Add To Cart</button>

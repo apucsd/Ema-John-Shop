@@ -4,31 +4,33 @@ import Order from "../Order/Order";
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
   useEffect(() => {
     fetch("../../../public/products.json")
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, []);
-  const [orderProduct, setOrderProduct] = useState({});
-  const addToCart = (product) => {
-    setOrderProduct(product);
+  const handleCart = (product) => {
+    // console.log(product);
+    const newCart = [...cart, product];
+    setCart(newCart);
   };
   return (
     <div className="grid lg:grid-cols-3 gap-3 lg:mx-14 my-6">
       <div className="col-span-2">
         <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-2">
           {/* {console.log(products)} */}
-          {products.slice(0, 2).map((product) => (
+          {products.map((product) => (
             <Card
               product={product}
               key={product.id}
-              addToCart={addToCart}
+              handleCart={handleCart}
             ></Card>
           ))}
         </div>
       </div>
-      <div className=" w-full mx-auto">
-        <Order product={orderProduct}></Order>
+      <div className="">
+        <Order cart={cart}></Order>
       </div>
     </div>
   );
