@@ -1,11 +1,13 @@
 import React from "react";
 
-const Card = ({ id, category, name, seller, price, ratings, img }) => {
-  //   console.log(props);
+const Card = (props) => {
+  const { id, category, name, seller, price, ratings, img } = props.product;
+  const addToCart = props.addToCart;
+  // console.log(props);
   return (
     <div className="card w-full bg-base-100 shadow-xl">
       <figure>
-        <img className="w-full h-[90%]" src={img} alt="Shoes" />
+        <img className="w-1/2 h-[90%]" src={img} alt="Shoes" />
       </figure>
       <div className="card-body">
         <h2 className="card-title">{name}</h2>
@@ -13,7 +15,10 @@ const Card = ({ id, category, name, seller, price, ratings, img }) => {
         <p>Manufacturer: {seller}</p>
         <p>Ratings: {ratings}</p>
       </div>
-      <div className="flex bg-primary p-3 text-white rounded-b-lg justify-center gap-2">
+      <div
+        onClick={() => addToCart(props.product)}
+        className="flex bg-primary p-3 cursor-pointer text-white rounded-b-lg justify-center gap-2"
+      >
         <button className=" ">Add To Cart</button>
         <p>
           <svg
